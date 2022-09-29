@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DeviceManagement_WebApp.Data;
 using DeviceManagement_WebApp.Models;
 using DeviceManagement_WebApp.Repository;
-using AspNetCore;
+//using AspNetCore;
 
 namespace DeviceManagement_WebApp.Controllers
 {
@@ -18,7 +18,7 @@ namespace DeviceManagement_WebApp.Controllers
         private readonly IDeviceRepository _deviceRepository;
         private readonly ICategoriesRepository _categoriesRepository;
         private readonly IZoneRepository _zoneRepository;
-        public DevicesController(IDeviceRepository deviceRepository, ICategoriesRepository categoriesRepository,iZoneRepository zoneRepository)
+        public DevicesController(IDeviceRepository deviceRepository, ICategoriesRepository categoriesRepository,IZoneRepository zoneRepository)
         {
             _deviceRepository = deviceRepository;
             _categoriesRepository = categoriesRepository;
@@ -53,7 +53,7 @@ namespace DeviceManagement_WebApp.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_categoriesRepository.GetAll(), "CategoryId", "CategoryName");
-            ViewData["ZoneId"] = new SelectList(_zoneRepository, "ZoneId", "ZoneName");
+            ViewData["ZoneId"] = new SelectList(_zoneRepository.GetAll(), "ZoneId", "ZoneName");
             return View();
         }
 
@@ -122,7 +122,7 @@ namespace DeviceManagement_WebApp.Controllers
         }
 
         // GET: Devices/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             if (id == null)
             {

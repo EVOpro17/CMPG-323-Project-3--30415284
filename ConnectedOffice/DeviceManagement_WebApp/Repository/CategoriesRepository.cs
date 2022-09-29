@@ -10,21 +10,5 @@ public class CategoriesRepository : GenericRepository<Category>, ICategoriesRepo
     {
     }
 
-    public IEnumerable<Category> GetAllCategories()
-    {
-        return _context.Set<Category>().ToList();
-    }
-
-    public Category GetById(int id)
-    {
-        return _context.Set<Category>().Find(id);
-    }
-    public void Delete(IEnumerable<Category> categories)
-    {
-        _context.Remove(categories);
-    }
-    public void Add(Category entity)
-    {
-        _context.Add(entity);
-    }
+    
 }
